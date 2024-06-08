@@ -14,7 +14,10 @@ def index_page(request):
 def getAllImagesAndFavouriteList(request):
     images = []
     favourite_list = []
-
+    
+    images = services_nasa_image_gallery.getAllImages()
+    favourite_list = getAllFavouritesByUser(request)
+    
     return images, favourite_list
 
 # función principal de la galería.
@@ -23,6 +26,7 @@ def home(request):
     # (*) este último, solo si se desarrolló el opcional de favoritos; caso contrario, será un listado vacío [].
     images = []
     favourite_list = []
+    images, favourite_list=getAllImagesAndFavouriteList(request)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
 
@@ -39,6 +43,7 @@ def search(request):
 @login_required
 def getAllFavouritesByUser(request):
     favourite_list = []
+    favourite_list = services_nasa_image_gallery.getAllFavouritesByUser(request)
     return render(request, 'favourites.html', {'favourite_list': favourite_list})
 
 

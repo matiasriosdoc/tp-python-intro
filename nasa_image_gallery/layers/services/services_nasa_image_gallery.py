@@ -9,9 +9,12 @@ def getAllImages(input=None):
     # obtiene un listado de imágenes desde transport.py y lo guarda en un json_collection.
     # ¡OJO! el parámetro 'input' indica si se debe buscar por un valor introducido en el buscador.
     json_collection = []
-
     images = []
 
+    json_collection = transport.getAllImages(input)
+    
+    for json_card in json_collection:
+        images.append(mapper.fromRequestIntoNASACard(json_card))
     # recorre el listado de objetos JSON, lo transforma en una NASACard y lo agrega en el listado de images. Ayuda: ver mapper.py.
 
     return images
@@ -37,8 +40,10 @@ def getAllFavouritesByUser(request):
         user = get_user(request)
 
         favourite_list = [] # buscamos desde el repositorio TODOS los favoritos del usuario (variable 'user').
+        
         mapped_favourites = []
 
+        favourite_list = repositories.getAllFavouritesByUser(user)
         for favourite in favourite_list:
             nasa_card = '' # transformamos cada favorito en una NASACard, y lo almacenamos en nasa_card.
             mapped_favourites.append(nasa_card)
