@@ -10,6 +10,10 @@ from django.contrib.auth import logout
 def index_page(request):
     return render(request, 'index.html')
 
+# función que invoca al template del login de la aplicación.
+def login(request):
+    return render(request, 'registration/login.html' )
+
 # auxiliar: retorna 2 listados -> uno de las imágenes de la API y otro de los favoritos del usuario.
 def getAllImagesAndFavouriteList(request):
     images = []
